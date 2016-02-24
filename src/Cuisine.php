@@ -33,6 +33,23 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
+        function getRestaurants() {
+            $restaurants = Array();
+            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurant WHERE cuisine_id = {$this->getId()};");
+
+            foreach($returned_restaurants as $restaurant)
+            {
+                $rest_name = $restaurant['rest_name'];
+                $id = $restaurant['id'];
+                $location = $restaurant['location'];
+                $price_range = $restaurant['price_range'];
+                $cuisine_id = $restaurant['cuisine_id'];
+                $new_restaurant =  new Restaurant($rest_name, $id, $location, $price_range, $cuisine_id);
+                array_push($restaurants, $new_restaurant);
+            }
+            return $restaurants;
+        }
+
         static function getAll()
         {
             $returned_cuisines = $GLOBALS['DB']->query("SELECT * FROM cuisine;");

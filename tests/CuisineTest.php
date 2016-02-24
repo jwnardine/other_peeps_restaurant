@@ -21,7 +21,7 @@
         protected function tearDown()
         {
             Cuisine::deleteAll();
-            // Restaurant::deleteAll();
+            Restaurant::deleteAll();
         }
 
         function test_getName()
@@ -84,6 +84,35 @@
 
             //Assert
             $this->assertEquals([$test_cuisine, $test_cuisine2], $result);
+        }
+
+        function test_getRestaurants()
+        {
+            //Arrange
+            $name = "Lebanese";
+            $id = null;
+            $test_cuisine = new Cuisine($name, $id);
+            $test_cuisine->save();
+
+            $cuisine_id = $test_cuisine->getId();
+
+            $rest_name = "Nicholas";
+            $location = "NE Grand";
+            $price_range = "$";
+            $test_restaurant = new Restaurant($rest_name, $id, $location, $price_range, $cuisine_id);
+            $test_restaurant->save();
+
+            $rest_name2 = "Ye olde cart";
+            $location2 = "Downtown";
+            $price_range2 = "$";
+            $test_restaurant2 = new Restaurant($rest_name2, $id, $location2, $price_range2, $cuisine_id);
+            $test_restaurant2->save();
+
+            //Act
+            $result = $test_cuisine->getRestaurants();
+
+            //Assert
+            $this->assertEquals([$test_restaurant, $test_restaurant2], $result);
         }
 
         function test_deleteAll()

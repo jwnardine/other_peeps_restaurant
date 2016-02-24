@@ -56,8 +56,6 @@
 
             $test_restaurant = new Restaurant($rest_name, $id, $location, $price_range, $cuisine_id);
             $test_restaurant->save();
-            var_dump($test_restaurant);
-            // var_dump($test_restaurant);
 
             //Act
             $result = $test_restaurant->getId();

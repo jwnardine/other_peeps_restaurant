@@ -41,16 +41,47 @@
 
         function test_getId()
         {
+            //Arrange
+            $name = "Ethiopian";
+            $id = null;
+            $test_cuisine = new Cuisine($name, $id);
+            $test_cuisine->save();
+
             $rest_name = "Bear Tooth";
-            $id = 1;
+
             $location = "Spenard Road";
             $price_range = "$";
-            $cuisine_id = 1;
+            $cuisine_id = $test_cuisine->getId();
+            // var_dump($cuisine_id);
 
             $test_restaurant = new Restaurant($rest_name, $id, $location, $price_range, $cuisine_id);
+            $test_restaurant->save();
+            var_dump($test_restaurant);
+            // var_dump($test_restaurant);
 
             //Act
             $result = $test_restaurant->getId();
+
+            //Assert
+            $this->assertEquals(true, is_numeric($result));
+        }
+
+        function test_getCuisineId()
+        {
+            //Arrange
+            $name = "Mexican";
+            $id = null;
+            $test_cuisine = new Cuisine($name, $id);
+            $test_cuisine->save();
+
+            $rest_name = "La Bonita";
+            $cuisine_id = $test_cuisine->getId();
+            $location = "N Killingsworth";
+            $price_range = "$";
+            $test_restaurant = new Restaurant($rest_name, $id, $location, $price_range, $cuisine_id);
+
+            //Act
+            $result = $test_restaurant->getCuisineId();
 
             //Assert
             $this->assertEquals(true, is_numeric($result));

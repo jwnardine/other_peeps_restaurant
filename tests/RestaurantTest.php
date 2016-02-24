@@ -106,6 +106,37 @@
             $this->assertEquals([$test_restaurant, $test_restaurant2], $result);
         }
 
+        function test_find()
+        {
+            //Arrange
+            $rest_name = "Bear Tooth";
+            $id = 1;
+            $location = "Spenard Road";
+            $price_range = "$";
+            $cuisine_id = 1;
+
+            $test_restaurant = new Restaurant($rest_name, $id, $location, $price_range, $cuisine_id);
+
+            $test_restaurant->save();
+
+            $rest_name2 = "Organic Oasis";
+            $id = 2;
+            $location2 = "2606 Spenard Road";
+            $price_range2 = "$$";
+            $cuisine_id = 1;
+
+            $test_restaurant2 = new Restaurant($rest_name2, $id, $location2, $price_range2, $cuisine_id);
+
+            $test_restaurant2->save();
+
+            //Act
+            $result = Restaurant::find($test_restaurant2->getId());
+
+            //Assert
+            $this->assertEquals($test_restaurant2, $result);
+
+        }
+
 
 
     }

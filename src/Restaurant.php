@@ -83,9 +83,17 @@
             return $restaurants;
         }
 
-        static function find()
+        static function find($search_id)
         {
+            $found_restaurant = null;
+            $restaurants = Restaurant::getAll();
 
+            foreach ($restaurants as $restaurant) {
+                if ($restaurant->getId() == $search_id) {
+                    $found_restaurant = $restaurant;
+                }
+            }
+            return $found_restaurant;
         }
 
         static function deleteAll(){

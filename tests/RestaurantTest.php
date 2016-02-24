@@ -24,19 +24,89 @@
 
         function test_getName()
         {
-            $name = "Bear Tooth";
+            $rest_name = "Bear Tooth";
+            $id = 1;
             $location = "Spenard Road";
             $price_range = "$";
-            $id = 1;
+            $cuisine_id = 1;
 
-            $test_restaurant = new Restaurant($name, $location, $price_range, $id);
+            $test_restaurant = new Restaurant($rest_name, $id, $location, $price_range, $cuisine_id);
 
             //Act
-            $result = $test_restaurant->getName();
+            $result = $test_restaurant->getRestName();
 
             //Assert
-            $this->assertEquals($name, $result);
+            $this->assertEquals($rest_name, $result);
         }
+
+        function test_getId()
+        {
+            $rest_name = "Bear Tooth";
+            $id = 1;
+            $location = "Spenard Road";
+            $price_range = "$";
+            $cuisine_id = 1;
+
+            $test_restaurant = new Restaurant($rest_name, $id, $location, $price_range, $cuisine_id);
+
+            //Act
+            $result = $test_restaurant->getId();
+
+            //Assert
+            $this->assertEquals(true, is_numeric($result));
+        }
+
+        function test_save()
+        {
+            //Arrange
+            $rest_name = "Bear Tooth";
+            $id = 1;
+            $location = "Spenard Road";
+            $price_range = "$";
+            $cuisine_id = 1;
+
+            $test_restaurant = new Restaurant($rest_name, $id, $location, $price_range, $cuisine_id);
+
+            $test_restaurant->save();
+
+            //Act
+            $result = Restaurant::getAll();
+
+            //Assert
+            $this->assertEquals($test_restaurant, $result[0]);
+        }
+
+        function test_getAll()
+        {
+            //Arrange
+            $rest_name = "Bear Tooth";
+            $id = 1;
+            $location = "Spenard Road";
+            $price_range = "$";
+            $cuisine_id = 1;
+
+            $test_restaurant = new Restaurant($rest_name, $id, $location, $price_range, $cuisine_id);
+
+            $test_restaurant->save();
+
+            $rest_name2 = "Organic Oasis";
+            $id = 2;
+            $location2 = "2606 Spenard Road";
+            $price_range2 = "$$";
+            $cuisine_id = 1;
+
+            $test_restaurant2 = new Restaurant($rest_name2, $id, $location2, $price_range2, $cuisine_id);
+
+            $test_restaurant2->save();
+
+            //Act
+            $result = Restaurant::getAll();
+
+            //Assert
+            $this->assertEquals([$test_restaurant, $test_restaurant2], $result);
+        }
+
+
 
     }
 

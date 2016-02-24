@@ -1,5 +1,7 @@
 <?php
-class Restaurant  {
+    class Restaurant
+    {
+        
 
-
-} ?>
+    }
+?>

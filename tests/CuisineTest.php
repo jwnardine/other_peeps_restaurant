@@ -6,6 +6,7 @@
     */
 
     require_once "src/Cuisine.php";
+    // require_once "src/Restaurant.php";
 
 
     $server = 'mysql:host=localhost;dbname=chomp_test';
@@ -15,7 +16,7 @@
 
 
 
-    class  CuisineTest extends PHPUnit_Framework_TestCase
+    class CuisineTest extends PHPUnit_Framework_TestCase
     {
         protected function tearDown()
         {
@@ -49,6 +50,10 @@
             //Assert
             $this->assertEquals(true, is_numeric($result));
         }
+
+        //function update()?
+
+        //function delete()?
 
         function test_save()
         {
@@ -109,11 +114,16 @@
 
             //Act
             $result = Cuisine::find($test_cuisine2->getId());
-            
+
             //Assert
             $this->assertEquals($test_cuisine2, $result);
 
         }
+
+        // function test_getRestaurants()
+        // {
+        //
+        // }
 
     }
  ?>

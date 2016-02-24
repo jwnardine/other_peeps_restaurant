@@ -81,8 +81,8 @@
             $this->assertEquals([$test_cuisine, $test_cuisine2], $result);
         }
 
-        function test_deleteAll() {
-
+        function test_deleteAll()
+        {
             //Arrange
             $name = "Italian";
             $test_cuisine = new Cuisine($name);
@@ -94,6 +94,25 @@
 
             //Assert
             $this->assertEquals([], $result);
+        }
+
+        function test_find()
+        {
+            //Arrange
+            $name = "Italian";
+            $test_cuisine = new Cuisine($name);
+            $test_cuisine->save();
+
+            $name2 = "Mexican";
+            $test_cuisine2 = new Cuisine($name2);
+            $test_cuisine2->save();
+
+            //Act
+            $result = Cuisine::find($test_cuisine2->getId());
+            
+            //Assert
+            $this->assertEquals($test_cuisine2, $result);
+
         }
 
     }

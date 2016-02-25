@@ -1,39 +1,58 @@
 <html>
 <head>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
     <title>Best Restaurant | Cuisines</title>
 </head>
 <body>
-    <h1>{{ cuisine.getName }}</h1>
+    <div class="container">
+        <h1>{{ cuisine.getName }}</h1>
 
-    <p><a href="/cuisines/{{ cuisine.getId }}/edit">Edit this cuisine</a></p>
+        <p><a href="/cuisines/{{ cuisine.getId }}/edit">Edit this cuisine</a></p>
 
-    <p><a href='/'>Home</a></p>
+        <p><a href='/'>Home</a></p>
 
-    {% if restaurants is not empty %}
-        <p>Here are the restaurants:</p>
-        <ul>
-            {% for restaurant in restaurants %}
-                <li>{{ restaurant.getRestName }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-    <h5>HI</h5>
-    {% endif %}
+        {% if restaurants is not empty %}
+            <h3>Here are the restaurants:</h3>
+            <ul>
+                {% for restaurant in restaurants %}
+                    <h4>{{ restaurant.getRestName }}</h4>
+                        <p><em>Location:</em> {{ restaurant.getLocation }}</p>
+                        <p><em>Price Range:</em> {{ restaurant.getPriceRange }}</p>
+                    <br>
+                {% endfor %}
+            </ul>
+        {% else %}
+        <h5>There aren't any restaurants, you BOZO!</h5>
+        {% endif %}
 
-    <h4>Add a restaurant</h4>
+        <h4>Add a restaurant</h4>
 
-    <form action='/restaurants' method='post'>
-        <input id="cuisine_id" name="cuisine_id" type="hidden" value="{{ cuisine.getId() }}">
-        <label for='rest_name'>Restaurant Name</label>
-        <input id='rest_name' name='rest_name' type='text'>
-        <label for='location'>Location:</label>
-        <input id='location' name='location' type='text'>
-        <label for='price_range'>Price Range</label>
-        <input id='price_range' name='price_range' type='text'>
+        <form action='/restaurants' method='post'>
+            <input id="cuisine_id" name="cuisine_id" type="hidden" value="{{ cuisine.getId() }}">
+            <label for='rest_name'>Restaurant Name</label>
+            <input id='rest_name' name='rest_name' type='text'>
+            <label for='location'>Location:</label>
+            <input id='location' name='location' type='text'>
 
-        <button type='submit'>Add restaurant</button>
-    </form>
+            <select name="price_range">
+                <option value="Hella cheap"<?php echo(isset($_POST['price_range'])&&($_POST['price_range']=='Hella cheap')?' selected="selected"':'');?>Hella Cheap</option>
+                <option value="Kinda cheap"<?php echo(isset($_POST['price_range'])&&($_POST['price_range']=='Kinda cheap')?' selected="selected"':'');?>Kinda Cheap</option>
+                <option value="Average"<?php echo(isset($_POST['price_range'])&&($_POST['price_range']=='Average')?' selected="selected"':'');?>Average</option>
+                <option value="Kinda expensive"<?php echo(isset($_POST['price_range'])&&($_POST['price_range']=='Kinda expensive')?' selected="selected"':'');?>Kinda Expensive</option>
+                <option value="Hella expensive"<?php echo(isset($_POST['price_range'])&&($_POST['price_range']=='Hella expensive')?' selected="selected"':'');?>Hella Expensive</option>
+            </select>
+            
+            <button class="btn btn-warning" type='submit'>Add restaurant</button>
+        </form>
 
-    <p><a href='/'>Home</a></p>
+        <form action='/delete_restaurants' method='post'>
+            <button class="btn btn-danger" type='submit'>Delete ALL the restaurants</button>
+        </form>
+
+        <p><a href='/'>Home</a></p>
+    </div>
+
 </body>
 </html>

@@ -167,6 +167,27 @@
 
         }
 
+        function test_update()
+		{
+			//Arrange
+			$name = "Mexican";
+			$test_cuisine = new Cuisine($name);
+			$test_cuisine->save();
+			$rest_name = "Taco Bell";
+			$location = "123 Test Street";
+			$cuisine_id =  $test_cuisine->getId();
+            $price_range = "Hella cheap";
+            $id = 1;
+			$test_restaurant = new Restaurant($rest_name, $id, $location, $cuisine_id, $price_range);
+			$test_restaurant->save();
+			$new_name = "Taco Hell";
+			//Act
+			$test_restaurant->update($new_name);
+			//Assert
+			$this->assertEquals('Taco Hell', $test_restaurant->getRestName());
+		}
+
+
 
 
     }

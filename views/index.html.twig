@@ -8,18 +8,27 @@
         <title></title>
     </head>
     <body>
-        <h1>Best Restaurants in Town</h1>
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Best Restaurants in Town</h1>
+            </div>
 
-        <form action="/cuisines" method="post">
-            <label for="name">Cuisine type:</label>
-            <input type="text" name="name">
-            <button type="submit" name="button">Add!</button>
-        </form>
-        <ul>
-            {% for cuisine in cuisines %}
-            <li><a href="/cuisines/{{ cuisine.getId }}">{{ cuisine.getName }}</a></li>
-            {% endfor %}
-        </ul>
+            <form action="/cuisines" method="post">
+                <label for="name">Cuisine type:</label>
+                <input type="text" name="name">
+                <button class="btn btn-success" type="submit" name="button">Add!</button>
+            </form>
+            <ul>
+                {% for cuisine in cuisines %}
+                <h4><a class="restaurant_names" href="/cuisines/{{ cuisine.getId }}">{{ cuisine.getName }}</a></h4>
+                {% endfor %}
+            </ul>
+
+            <form action='/delete_cuisines' method='post'>
+                <button class="btn btn-danger" type='submit'>Delete ALL the cuisines</button>
+            </form>
+        </div>
+
 
 
     </body>

@@ -68,6 +68,12 @@
 
     });
 
+    $app->delete("/cuisines/{id}", function($id) use ($app) {
+    $cuisine = Cuisine::find($id);
+    $cuisine->delete();
+    return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
+});
+
 
 
 

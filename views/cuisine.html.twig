@@ -5,6 +5,10 @@
 <body>
     <h1>{{ cuisine.getName }}</h1>
 
+    <p><a href="/cuisines/{{ cuisine.getId }}/edit">Edit this cuisine</a></p>
+
+    <p><a href='/'>Home</a></p>
+
     {% if restaurants is not empty %}
         <p>Here are the restaurants:</p>
         <ul>

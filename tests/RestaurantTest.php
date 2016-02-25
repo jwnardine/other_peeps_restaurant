@@ -105,6 +105,7 @@
             $this->assertEquals($test_restaurant, $result[0]);
         }
 
+
         function test_getAll()
         {
             //Arrange

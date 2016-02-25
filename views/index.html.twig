@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="/css/bootstrap-theme.min.css" type="text/css">
+        <link rel="stylesheet" href="/css/styles.css" type="text/css">
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1>Best Restaurants in Town</h1>
+
+        <form action="/cuisines" method="post">
+            <label for="name">Cuisine type:</label>
+            <input type="text" name="name">
+            <button type="submit" name="button">Add!</button>
+        </form>
+        <ul>
+            {% for cuisine in cuisines %}
+            <li><a href="/cuisines/{{ cuisine.getId }}">{{ cuisine.getName }}</a></li>
+            {% endfor %}
+        </ul>
+
+
+    </body>
+</html>

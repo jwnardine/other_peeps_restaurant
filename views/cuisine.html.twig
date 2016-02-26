@@ -20,8 +20,21 @@
                     <h4>{{ restaurant.getRestName }}</h4>
                         <p><em>Location:</em> {{ restaurant.getLocation }}</p>
                         <p><em>Price Range:</em> {{ restaurant.getPriceRange }}</p>
+                        <form action="/restaurant/{{ cuisine.getId }}/{{ restaurant.getId }}/edit_form">
+                            <button type="submit" name="button">Update This restaurant</button>
+                        </form>
                     <br>
+
                 {% endfor %}
+                {% if form %}
+                    <form action="/restaurants/updated" method="post">
+                        <input name="_method" type="hidden" value="patch">
+                        <input name="current_restaurantId" type="hidden" value="{{ current_restaurant.getId }}">
+                        <input name="cuisine_id" type="hidden" value="{{ cuisine.getId }}">
+                        <input type="text" name="new_name" value="{{ restaurant.getName }}">
+                        <button type="submit" name="button">Edit Name</button>
+                    </form>
+                {% endif %}
             </ul>
         {% else %}
         <h5>There aren't any restaurants, you BOZO!</h5>
@@ -30,12 +43,12 @@
         <h4>Add a restaurant</h4>
 
         <form action='/restaurants' method='post'>
-            <input id="cuisine_id" name="cuisine_id" type="hidden" value="{{ cuisine.getId() }}">
+            <input id="cuisine_id" name="cuisine_id" type="hidden">
             <label for='rest_name'>Restaurant Name</label>
             <input id='rest_name' name='rest_name' type='text'>
             <label for='location'>Location:</label>
             <input id='location' name='location' type='text'>
-
+            <label for='price_range'>Price Range:</label>
             <select name="price_range">
                 <option value="Hella cheap"<?php echo(isset($_POST['price_range'])&&($_POST['price_range']=='Hella cheap')?' selected="selected"':'');?>Hella Cheap</option>
                 <option value="Kinda cheap"<?php echo(isset($_POST['price_range'])&&($_POST['price_range']=='Kinda cheap')?' selected="selected"':'');?>Kinda Cheap</option>
@@ -43,13 +56,15 @@
                 <option value="Kinda expensive"<?php echo(isset($_POST['price_range'])&&($_POST['price_range']=='Kinda expensive')?' selected="selected"':'');?>Kinda Expensive</option>
                 <option value="Hella expensive"<?php echo(isset($_POST['price_range'])&&($_POST['price_range']=='Hella expensive')?' selected="selected"':'');?>Hella Expensive</option>
             </select>
-            
+
             <button class="btn btn-warning" type='submit'>Add restaurant</button>
         </form>
 
         <form action='/delete_restaurants' method='post'>
             <button class="btn btn-danger" type='submit'>Delete ALL the restaurants</button>
         </form>
+
+
 
         <p><a href='/'>Home</a></p>
     </div>

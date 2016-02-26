@@ -43,7 +43,7 @@
         <h4>Add a restaurant</h4>
 
         <form action='/restaurants' method='post'>
-            <input id="cuisine_id" name="cuisine_id" type="hidden">
+            <input id="cuisine_id" name="cuisine_id" type="hidden" value="{{ cuisine.getId }}">
             <label for='rest_name'>Restaurant Name</label>
             <input id='rest_name' name='rest_name' type='text'>
             <label for='location'>Location:</label>
@@ -61,6 +61,7 @@
         </form>
 
         <form action='/delete_restaurants' method='post'>
+            <input id="cuisine_id" name="cuisine_id" type="hidden" value="{{ cuisine.getId }}">
             <button class="btn btn-danger" type='submit'>Delete ALL the restaurants</button>
         </form>
 

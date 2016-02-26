@@ -39,8 +39,9 @@
             $this->setName($new_name);
         }
 
-        function getRestaurants() {
-            $restaurants = [];
+        function getRestaurants()
+        {
+            $restaurants = array();
             $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurant WHERE cuisine_id = {$this->getId()};");
 
             foreach($returned_restaurants as $restaurant)
@@ -85,7 +86,6 @@
         {
             $found_cuisine = null;
             $cuisines = Cuisine::getAll();
-
             foreach ($cuisines as $cuisine) {
                 if ($cuisine->getId() == $search_id) {
                     $found_cuisine = $cuisine;

@@ -35,6 +35,22 @@
         ));
     });
 
+    $app->post("/restaurants", function() use ($app) {
+        $rest_name = $_POST['rest_name'];
+        $location = $_POST['location'];
+        $price_range = $_POST['price_range'];
+        $cuisine_id = $_POST['cuisine_id'];
+        var_dump($cuisine_id);
+        $new_restaurant = new Restaurant($rest_name, $id = null, $location, $price_range, $cuisine_id);
+        $new_restaurant->save();
+        $cuisine = Cuisine::find($cuisine_id);
+        return $app['twig']->render('cuisine.html.twig', array(
+            'cuisine' => $cuisine,
+            'restaurants' => $cuisine->getRestaurants()
+        ));
+
+    });
+
     $app->get("/cuisines/{id}/edit", function($id) use ($app) {
         $new_cuisine = Cuisine::find($id);
         return $app['twig']->render('cuisine_edit.html.twig', array('cuisine' => $new_cuisine));
@@ -55,22 +71,6 @@
         ));
     });
 
-    $app->post("/restaurants", function() use ($app) {
-        $rest_name = $_POST['rest_name'];
-        $location = $_POST['location'];
-        $price_range = $_POST['price_range'];
-        $cuisine_id = $_POST['cuisine_id'];
-        $new_restaurant = new Restaurant($rest_name, $id = null, $location, $price_range, $cuisine_id);
-        $new_restaurant->save();
-        $cuisine = Cuisine::find($cuisine_id);
-
-    var_dump($cuisine);
-        return $app['twig']->render('cuisine.html.twig', array(
-            'cuisine' => $cuisine,
-            'restaurants' => $cuisine->getRestaurants()
-        ));
-
-    });
 
     $app->delete("/cuisines/{id}", function($id) use ($app) {
         $cuisine = Cuisine::find($id);
@@ -82,10 +82,9 @@
     {
 
         $current_restaurant = Restaurant::find($id);
-        $current_id = $current_restaurant->getId();
         $cuisine = Cuisine::find($cuisine_id);
         var_dump($cuisine_id);
-        return $app['twig']->render('cuisine.html.twig', array('current_restaurant' => $current_restaurant, 'cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants(), 'form' => true, 'current_id' => $current_id));
+        return $app['twig']->render('cuisine.html.twig', array('current_restaurant' => $current_restaurant, 'cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants(), 'form' => true));
     });
 
 
@@ -105,7 +104,10 @@
 
     $app->post("/delete_restaurants", function() use ($app) {
        Restaurant::deleteAll();
-       return $app['twig']->render('cuisine.html.twig');
+       $cuisine = Cuisine::find($_POST['cuisine_id']);
+       return $app['twig']->render('cuisine.html.twig', array(
+           'cuisine' => $cuisine
+       ));
    });
 
 

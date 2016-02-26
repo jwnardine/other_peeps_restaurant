@@ -103,7 +103,7 @@
 
 		function update($new_name)
 		{
-		    $GLOBALS['DB']->exec("UPDATE restaurants SET name = '{$new_name}' WHERE id = {$this->getId()};");
+		    $GLOBALS['DB']->exec("UPDATE restaurant SET rest_name = '{$new_name}' WHERE id = {$this->getId()};");
 		    $this->setRestName($new_name);
 		}
     }
